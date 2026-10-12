@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.27"]  # PEP 639: SPDX `license` + `license-files`
 build-backend = "hatchling.build"
 
 [project]
@@ -7,6 +7,8 @@ name = "gpumedic"
 version = "0.1.0"
 description = "Scan GPU nodes for hardware problems and say what to do about them."
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
 requires-python = ">=3.9"
 dependencies = []
 

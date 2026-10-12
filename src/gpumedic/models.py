@@ -10,6 +10,15 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum, IntEnum
 from typing import Any, Optional
 
+# Version of the NodeSnapshot JSON format. Bump it when a change would break
+# older readers (renaming or removing a field, changing a unit); adding an
+# optional field doesn't need a bump.
+SCHEMA_VERSION = 1
+
+
+class UnsupportedSchema(ValueError):
+    """A snapshot was written by a newer gpumedic than this one."""
+
 
 class Severity(IntEnum):
     OK = 0
@@ -97,12 +106,20 @@ class NodeSnapshot:
     unmatched_xids: list[XidEvent] = field(default_factory=list)
     # Things the collector could not see, e.g. "kernel log not readable".
     notes: list[str] = field(default_factory=list)
+    schema_version: int = SCHEMA_VERSION
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "NodeSnapshot":
+        # Snapshots from before versioning have no field and are version 1.
+        version = data.get("schema_version", 1)
+        if version > SCHEMA_VERSION:
+            raise UnsupportedSchema(
+                f"Snapshot uses schema version {version}, but this gpumedic reads up to "
+                f"{SCHEMA_VERSION}. Upgrade gpumedic to read it."
+            )
         return cls(
             hostname=data["hostname"],
             collector=data["collector"],

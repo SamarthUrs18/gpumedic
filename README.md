@@ -103,3 +103,7 @@ from gpumedic.rules import diagnose
 diag = diagnose(get_collector().collect())
 print(diag.node_verdict)
 ```
+
+## License
+
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).

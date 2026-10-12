@@ -1,11 +1,14 @@
 import json
 
+import pytest
+
+from gpumedic.collectors.base import CollectorUnavailable
 from gpumedic.collectors.kernel_log import attach_xids, normalize_pci_bus_id, parse_xids
 from gpumedic.collectors.macos import parse_cpu_speed_limit, parse_vm_stat_used_mb
 from gpumedic.collectors.mock import MockCollector
 from gpumedic.collectors.nvml import decode_throttle_reasons
 from gpumedic.collectors.replay import ReplayCollector
-from gpumedic.models import GpuSample, NodeSnapshot
+from gpumedic.models import SCHEMA_VERSION, GpuSample, NodeSnapshot, UnsupportedSchema
 
 DMESG = """\
 [ 1234.5] NVRM: Xid (PCI:0000:3b:00): 79, pid=4242, name=python, GPU has fallen off the bus.
@@ -59,3 +62,24 @@ def test_snapshot_round_trips_through_replay(tmp_path):
     replayed.collector = original.collector
     assert replayed == original
     assert NodeSnapshot.from_dict(original.to_dict()) == original
+
+
+def test_snapshot_records_schema_version():
+    assert MockCollector("healthy").collect().to_dict()["schema_version"] == SCHEMA_VERSION
+
+
+def test_snapshot_from_before_versioning_is_accepted():
+    data = MockCollector("healthy").collect().to_dict()
+    del data["schema_version"]
+    assert NodeSnapshot.from_dict(data).gpus
+
+
+def test_newer_schema_is_refused(tmp_path):
+    data = MockCollector("healthy").collect().to_dict()
+    data["schema_version"] = SCHEMA_VERSION + 1
+    with pytest.raises(UnsupportedSchema):
+        NodeSnapshot.from_dict(data)
+
+    (tmp_path / "snapshot.json").write_text(json.dumps(data))
+    with pytest.raises(CollectorUnavailable, match="Upgrade gpumedic"):
+        ReplayCollector(str(tmp_path)).collect()

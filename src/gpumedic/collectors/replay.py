@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from ..models import NodeSnapshot
+from ..models import NodeSnapshot, UnsupportedSchema
 from .base import Collector, CollectorUnavailable
 
 
@@ -22,6 +22,9 @@ class ReplayCollector(Collector):
     def collect(self) -> NodeSnapshot:
         data = json.loads(self.path.read_text())
         # Accept both a bare snapshot and the full `scan --json` output.
-        snapshot = NodeSnapshot.from_dict(data.get("snapshot", data))
+        try:
+            snapshot = NodeSnapshot.from_dict(data.get("snapshot", data))
+        except UnsupportedSchema as e:
+            raise CollectorUnavailable(str(e)) from e
         snapshot.collector = self.name
         return snapshot
