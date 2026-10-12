@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+dist/
+build/
+uv.lock
+
+# Raw hardware captures can contain hostnames and serials; commit only
+# sanitized ones under tests/fixtures/.
+captures/

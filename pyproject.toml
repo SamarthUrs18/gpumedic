@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gpumedic"
+version = "0.1.0"
+description = "Scan GPU nodes for hardware problems and say what to do about them."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+# Needed only on machines with NVIDIA GPUs (e.g. a RunPod pod).
+nvidia = ["nvidia-ml-py>=12.535"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+gpumedic = "gpumedic.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gpumedic"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
