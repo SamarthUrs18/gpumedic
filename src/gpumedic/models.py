@@ -136,7 +136,7 @@ class Finding:
     severity: Severity
     code: str  # stable id, e.g. "thermal.slowdown"
     message: str
-    action: str = ""
+    suggestion: str = ""  # advice for a person; gpumedic never acts on it
     gpu_index: Optional[int] = None  # None means node-level
 
 

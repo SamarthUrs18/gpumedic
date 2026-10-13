@@ -32,15 +32,15 @@ def _temperature(g: GpuSample, t: Thresholds) -> list[Finding]:
         crit_at, warn_at = g.slowdown_temp_c, g.slowdown_temp_c - t.temp_warn_margin_c
     else:
         crit_at, warn_at = t.temp_crit_c, t.temp_warn_c
-    action = "Check fans, airflow and inlet temperature for this node."
+    suggestion = "Check fans, airflow and inlet temperature for this node."
     if temp >= crit_at:
         return [Finding(Severity.CRIT, "thermal.slowdown",
                         f"{temp:.0f}°C is at or above the slowdown temperature ({crit_at:.0f}°C); the GPU is cutting its clocks.",
-                        action, g.index)]
+                        suggestion, g.index)]
     if temp >= warn_at:
         return [Finding(Severity.WARN, "thermal.hot",
                         f"{temp:.0f}°C is close to the slowdown temperature ({crit_at:.0f}°C).",
-                        action, g.index)]
+                        suggestion, g.index)]
     return []
 
 
@@ -92,7 +92,7 @@ def _xids(g: GpuSample, t: Thresholds) -> list[Finding]:
     for event in g.xid_events:
         info = xid.lookup(event.xid)
         findings.append(Finding(info.severity, f"xid.{event.xid}",
-                                f"XID {event.xid}: {info.meaning}.", info.action, g.index))
+                                f"XID {event.xid}: {info.meaning}.", info.suggestion, g.index))
     return findings
 
 
@@ -138,7 +138,7 @@ def _missing_gpus(node: NodeSnapshot, expected: Optional[int]) -> list[Finding]:
         info = xid.lookup(event.xid)
         findings.append(Finding(info.severity, f"xid.{event.xid}",
                                 f"XID {event.xid} on PCI {event.pci_bus_id}, which is no longer visible: {info.meaning}.",
-                                info.action))
+                                info.suggestion))
     if expected is not None and len(node.gpus) < expected:
         findings.append(Finding(Severity.CRIT, "node.missing_gpus",
                                 f"Only {len(node.gpus)} of {expected} expected GPUs are visible.",

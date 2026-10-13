@@ -67,13 +67,13 @@ def render_text(diag: Diagnosis, color: bool = False) -> str:
     lines += ["", style(_BOLD, "Findings")]
     if not diag.findings:
         lines.append("  None. Everything looks healthy.")
-    shown_actions = set()
+    shown = set()
     for f in diag.findings:
         where = f"GPU {f.gpu_index}" if f.gpu_index is not None else "node"
         lines.append(f"  {c(f.severity, f.severity.name.ljust(4))}  {where.ljust(6)}  {f.message}  {style(_DIM, f'[{f.code}]')}")
-        if f.action and (f.gpu_index, f.action) not in shown_actions:
-            shown_actions.add((f.gpu_index, f.action))
-            lines.append(f"              → {f.action}")
+        if f.suggestion and (f.gpu_index, f.suggestion) not in shown:
+            shown.add((f.gpu_index, f.suggestion))
+            lines.append(f"              → Suggested: {f.suggestion}")
 
     for note in node.notes:
         lines.append(style(_DIM, f"  note: {note}"))

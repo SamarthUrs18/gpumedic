@@ -71,11 +71,10 @@ That makes it usable as a Slurm node health check, a cron job or a CI gate.
 1. Build and test on any machine with `--mock` scenarios and the `macos` collector.
 2. On a rented GPU (e.g. a RunPod pod):
    ```bash
-   git clone <repo> && cd gpumedic && pip install -e ".[nvidia]"
-   gpumedic scan
-   gpumedic capture
+   cd /workspace/gpumedic && bash scripts/runpod-check.sh
    ```
-3. Copy the `captures/<host>-<time>/` folder back and run `gpumedic scan --replay` on it.
+   It installs gpumedic, runs a scan and a capture, and packs the results into one `.tar.gz`.
+3. Copy the archive back, unpack it and run `gpumedic scan --replay <folder>` on it.
    Sanitized captures can become test fixtures.
 
 **Container note:** RunPod pods are containers, so the kernel log (and therefore XID errors)
@@ -88,7 +87,7 @@ src/gpumedic/
   models.py        NodeSnapshot, GpuSample, Finding, Verdict
   collectors/      nvml (NVIDIA), macos, mock, replay, kernel_log (XIDs)
   rules.py         snapshot → findings
-  xid.py           XID meanings and actions
+  xid.py           XID meanings and suggestions
   report.py        text and JSON output
   capture.py       record raw output on a GPU node
   cli.py           command line

@@ -1,6 +1,6 @@
 """What common NVIDIA XID errors mean and what to do about them.
 
-Severities and actions are starting points summarized from NVIDIA's XID
+Severities and suggestions are starting points summarized from NVIDIA's XID
 documentation (docs.nvidia.com/deploy/xid-errors); verify against it and
 tune per fleet.
 """
@@ -15,7 +15,7 @@ from .models import Severity
 class XidInfo(NamedTuple):
     severity: Severity
     meaning: str
-    action: str
+    suggestion: str
 
 
 _APP_FAULT = "Check the job's logs. If it repeats across different jobs on this GPU, run DCGM diagnostics."
