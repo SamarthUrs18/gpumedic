@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/SamarthUrs18/gpumedic/actions/workflows/ci.yml"><img alt="Tests" src="https://github.com/SamarthUrs18/gpumedic/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://pypi.org/project/gpumedic/"><img alt="PyPI" src="https://img.shields.io/pypi/v/gpumedic?cacheSeconds=3600"></a>
+  <a href="https://pypi.org/project/gpumedic/"><img alt="PyPI" src="https://img.shields.io/pypi/v/gpumedic?label=pypi"></a>
   <img alt="Python 3.9 to 3.13" src="https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue">
   <a href="https://github.com/SamarthUrs18/gpumedic/blob/main/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-green"></a>
 </p>
