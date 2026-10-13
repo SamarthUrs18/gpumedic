@@ -164,10 +164,11 @@ gpumedic than the reader is refused with a message to upgrade, rather than misre
 
 ## Status
 
-**0.1 — early.** The checks, report and CLI are covered by tests against simulated nodes and a fake
-NVML (a datacenter card, and a consumer card that refuses ECC queries, on old and new NVML
-bindings). The first run on real NVIDIA hardware is the next step; until then, treat the NVIDIA
-collector as unproven.
+**0.1 — early.** Run on real hardware so far: a GeForce RTX 3090 (driver 580, in a RunPod container),
+idle and under full load, with every reading matching `nvidia-smi`. Snapshots from that run are
+test fixtures. Datacenter cards (ECC, row remapping, NVLink) are covered only by a fake NVML in the
+tests until someone runs it on an A100 or H100, and XID reading hasn't been tried outside a
+container yet.
 
 Next: a DCGM collector (diagnostics, NVLink), AMD GPUs, a threshold config file, and Kubernetes
 and Prometheus integrations.

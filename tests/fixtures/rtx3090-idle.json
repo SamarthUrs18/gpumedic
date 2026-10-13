@@ -1,0 +1,40 @@
+{
+  "hostname": "runpod-rtx3090",
+  "collector": "nvml",
+  "timestamp": 1791917426.307798,
+  "driver_version": "580.126.20",
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "uuid": "GPU-redacted",
+      "pci_bus_id": "81:00",
+      "temperature_c": 29,
+      "slowdown_temp_c": 95,
+      "power_w": 28.865,
+      "power_limit_w": 350.0,
+      "utilization_pct": 0,
+      "memory_used_mb": 452.75,
+      "memory_total_mb": 24576.0,
+      "sm_clock_mhz": 210,
+      "max_sm_clock_mhz": 2100,
+      "throttle_reasons": [
+        "gpu_idle"
+      ],
+      "ecc_corrected": null,
+      "ecc_uncorrected": null,
+      "remap_pending": null,
+      "remap_failed": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 4,
+      "pcie_width": 16,
+      "pcie_width_max": 16,
+      "xid_events": []
+    }
+  ],
+  "unmatched_xids": [],
+  "notes": [
+    "Kernel log not readable (common in containers); XID errors were not checked."
+  ],
+  "schema_version": 1
+}
