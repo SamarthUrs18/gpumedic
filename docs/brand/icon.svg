@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <g transform="translate(4 26)">
+  <defs>
+    <g id="fan">
+      <circle r="19" fill="#57606a"/>
+      <circle r="16.5" fill="#32383f"/>
+      <path transform="rotate(0.00)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(51.43)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(102.86)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(154.29)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(205.71)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(257.14)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <path transform="rotate(308.57)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#d0d7de"/>
+      <circle r="5" fill="#8c959f"/>
+    </g>
+  </defs>
+  <rect x="0" y="6" width="7" height="52" rx="2" fill="#8c959f"/>
+  <rect x="9" y="8" width="111" height="48" rx="9" fill="#24292f"/>
+  <use href="#fan" x="38" y="32"/>
+  <use href="#fan" x="91" y="32"/>
+  <rect x="9" y="66" width="35" height="10" rx="3" fill="#2da44e"/>
+  <rect x="47" y="66" width="35" height="10" rx="3" fill="#d4a72c"/>
+  <rect x="85" y="66" width="35" height="10" rx="3" fill="#cf222e"/>
+  </g>
+</svg>

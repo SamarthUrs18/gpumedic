@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 84" width="390" height="84">
+  <defs>
+    <g id="fan">
+      <circle r="19" fill="#8c959f"/>
+      <circle r="16.5" fill="#afb8c1"/>
+      <path transform="rotate(0.00)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(51.43)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(102.86)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(154.29)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(205.71)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(257.14)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <path transform="rotate(308.57)" d="M0 -4.5 C5 -6.5 9.5 -11.5 7.5 -15.8 C3.5 -15.6 -0.8 -10.8 0 -4.5 Z" fill="#24292f"/>
+      <circle r="5" fill="#57606a"/>
+    </g>
+  </defs>
+  <rect x="0" y="6" width="7" height="52" rx="2" fill="#6e7781"/>
+  <rect x="9" y="8" width="111" height="48" rx="9" fill="#d0d7de"/>
+  <use href="#fan" x="38" y="32"/>
+  <use href="#fan" x="91" y="32"/>
+  <rect x="9" y="66" width="35" height="10" rx="3" fill="#3fb950"/>
+  <rect x="47" y="66" width="35" height="10" rx="3" fill="#d29922"/>
+  <rect x="85" y="66" width="35" height="10" rx="3" fill="#f85149"/>
+  <text x="142" y="57" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="50" font-weight="700" letter-spacing="-1" fill="#f0f6fc">gpumedic</text>
+</svg>
