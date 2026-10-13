@@ -12,7 +12,8 @@ from __future__ import annotations
 
 import re
 import subprocess
-from typing import Iterable, Optional
+from collections.abc import Iterable
+from typing import Optional
 
 from ..models import GpuSample, XidEvent
 

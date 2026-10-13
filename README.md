@@ -1,14 +1,15 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/brand/logo-dark.svg">
-    <img alt="gpumedic" src="docs/brand/logo-light.svg" width="390">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SamarthUrs18/gpumedic/main/docs/brand/logo-dark.png">
+    <img alt="gpumedic" src="https://raw.githubusercontent.com/SamarthUrs18/gpumedic/main/docs/brand/logo-light.png" width="390">
   </picture>
 </p>
 
 <p align="center">
+  <a href="https://github.com/SamarthUrs18/gpumedic/actions/workflows/ci.yml"><img alt="Tests" src="https://github.com/SamarthUrs18/gpumedic/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://pypi.org/project/gpumedic/"><img alt="PyPI" src="https://img.shields.io/pypi/v/gpumedic?cacheSeconds=3600"></a>
   <img alt="Python 3.9 to 3.13" src="https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue">
-  <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-green"></a>
+  <a href="https://github.com/SamarthUrs18/gpumedic/blob/main/LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-green"></a>
 </p>
 
 **A health check for GPU machines.** It reads what the NVIDIA driver knows about every GPU on a
@@ -126,7 +127,7 @@ Most of gpumedic can be developed and tested on a laptop. Two pieces make that w
   output plus a snapshot. Copy the folder back and `gpumedic scan --replay <folder>` runs the
   checks on it anywhere.
 
-[`scripts/runpod-check.sh`](scripts/runpod-check.sh) does the whole real-hardware side in one go
+[`scripts/runpod-check.sh`](https://github.com/SamarthUrs18/gpumedic/blob/main/scripts/runpod-check.sh) does the whole real-hardware side in one go
 on a rented GPU: install, scan, capture, and pack the results into one `.tar.gz` to copy back.
 
 ## The `gpumedic` CLI
@@ -173,12 +174,27 @@ container yet.
 Next: a DCGM collector (diagnostics, NVLink), AMD GPUs, a threshold config file, and Kubernetes
 and Prometheus integrations.
 
+## Contributing and contact
+
+| | |
+|---|---|
+| Bugs and questions | **[GitHub issues](https://github.com/SamarthUrs18/gpumedic/issues)**. For a wrong verdict, attach `gpumedic scan --json` |
+| A GPU we haven't seen | A `gpumedic capture` from an A100, H100, AMD card or bare-metal node is the most useful thing you can send |
+| Security problems | **[Report privately](https://github.com/SamarthUrs18/gpumedic/security/advisories/new)**, not as a public issue ([why](https://github.com/SamarthUrs18/gpumedic/blob/main/SECURITY.md)) |
+| Changing the code | **[CONTRIBUTING.md](https://github.com/SamarthUrs18/gpumedic/blob/main/CONTRIBUTING.md)**. Your first pull request asks you to sign a short [CLA](https://github.com/SamarthUrs18/gpumedic/blob/main/CLA.md) |
+
+What changed in each release is in **[CHANGELOG.md](https://github.com/SamarthUrs18/gpumedic/blob/main/CHANGELOG.md)**.
+
 ## Development
 
 ```bash
 uv venv && uv pip install -e ".[dev]"     # or: pip install -e ".[dev]"
 pytest
+ruff check .
 ```
+
+CI runs both on Python 3.9 to 3.13. None of the tests need a GPU: the NVIDIA collector runs against
+a fake NVML, and snapshots recorded on real cards are replayed as fixtures.
 
 The pipeline is `collect() → NodeSnapshot → diagnose() → Diagnosis → report`:
 
@@ -198,6 +214,7 @@ new data source is a class with a `collect()` method; the rules and report don't
 
 ## License
 
-[Apache-2.0](LICENSE). Use it at work, embed it in a commercial product, ship it closed — keep the
-copyright notice and the [`NOTICE`](NOTICE) file in what you distribute, and don't use the
-project's name to imply it endorses you.
+[Apache-2.0](https://github.com/SamarthUrs18/gpumedic/blob/main/LICENSE). Use it at work, embed it
+in a commercial product, ship it closed — keep the copyright notice and the
+[`NOTICE`](https://github.com/SamarthUrs18/gpumedic/blob/main/NOTICE) file in what you distribute,
+and don't use the project's name to imply it endorses you.

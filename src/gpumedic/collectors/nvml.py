@@ -94,9 +94,7 @@ class NvmlCollector(Collector):
         power_mw = q(nv.nvmlDeviceGetPowerUsage, h)
         limit_mw = q(nv.nvmlDeviceGetEnforcedPowerLimit, h)
         # Renamed from "throttle reasons" to "clocks event reasons" in newer NVML.
-        reasons_fn = getattr(nv, "nvmlDeviceGetCurrentClocksEventReasons", None) or getattr(
-            nv, "nvmlDeviceGetCurrentClocksThrottleReasons"
-        )
+        reasons_fn = getattr(nv, "nvmlDeviceGetCurrentClocksEventReasons", None) or nv.nvmlDeviceGetCurrentClocksThrottleReasons
         reasons = q(reasons_fn, h)
         remap = q(nv.nvmlDeviceGetRemappedRows, h)  # (corrected, uncorrected, pending, failed)
 

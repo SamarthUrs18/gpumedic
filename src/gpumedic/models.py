@@ -33,7 +33,7 @@ class Verdict(str, Enum):
     DRAIN = "DRAIN"
 
     @classmethod
-    def from_severity(cls, severity: Severity) -> "Verdict":
+    def from_severity(cls, severity: Severity) -> Verdict:
         if severity >= Severity.CRIT:
             return cls.DRAIN
         if severity >= Severity.WARN:
@@ -89,7 +89,7 @@ class GpuSample:
     xid_events: list[XidEvent] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "GpuSample":
+    def from_dict(cls, data: dict[str, Any]) -> GpuSample:
         data = dict(data)
         data["xid_events"] = [XidEvent(**x) for x in data.get("xid_events", [])]
         return cls(**data)
@@ -112,7 +112,7 @@ class NodeSnapshot:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "NodeSnapshot":
+    def from_dict(cls, data: dict[str, Any]) -> NodeSnapshot:
         # Snapshots from before versioning have no field and are version 1.
         version = data.get("schema_version", 1)
         if version > SCHEMA_VERSION:

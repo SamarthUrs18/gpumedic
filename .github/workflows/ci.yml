@@ -1,0 +1,40 @@
+name: Tests
+
+# The linter and the test suite. Nothing here needs a GPU: the NVIDIA collector
+# runs against a fake NVML, and real-hardware snapshots are replayed as fixtures.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check .
+
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      # Every version pyproject allows. 3.9 is the floor because old cluster
+      # nodes run old Pythons, and gpumedic has to install there.
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    name: tests (python ${{ matrix.python-version }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q

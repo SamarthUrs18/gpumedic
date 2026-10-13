@@ -30,10 +30,16 @@ classifiers = [
     "Topic :: System :: Monitoring",
 ]
 
+[project.urls]
+Homepage = "https://github.com/SamarthUrs18/gpumedic"
+Source = "https://github.com/SamarthUrs18/gpumedic"
+Issues = "https://github.com/SamarthUrs18/gpumedic/issues"
+Changelog = "https://github.com/SamarthUrs18/gpumedic/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 # Needed only on machines with NVIDIA GPUs (e.g. a RunPod pod).
 nvidia = ["nvidia-ml-py>=12.535"]
-dev = ["pytest>=7"]
+dev = ["pytest>=7", "ruff>=0.6"]
 
 [project.scripts]
 gpumedic = "gpumedic.cli:main"
@@ -43,3 +49,12 @@ packages = ["src/gpumedic"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+# Optional[X] stays: on Python 3.9 `X | None` fails wherever annotations are evaluated (typing.get_type_hints).
+ignore = ["UP045", "UP007"]
