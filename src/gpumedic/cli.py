@@ -56,6 +56,7 @@ def cmd_watch(args) -> int:
             _scan_once(args)
             time.sleep(args.interval)
     except KeyboardInterrupt:
+        print()  # end the ^C line so the shell prompt starts on its own line
         return 0
 
 
